@@ -4646,7 +4646,6 @@ button.swiper-pagination-bullet {
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;
-    line-height: 1
 }
 
 .fa-lg {
@@ -12482,7 +12481,7 @@ blockquote {
 
 .section.started .started-content {
     padding-left: 8%;
-    max-width: 500px
+    max-width: 100%
 }
 
 .section.started .started-content .h-subtitles {
