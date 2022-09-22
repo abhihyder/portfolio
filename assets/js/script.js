@@ -11739,14 +11739,44 @@
 !(function (n) {
   "use strict";
 
+  let writeable_text = [];
+  let terator = 0;
+  let loop_count = 0;
+  let txt;
+
   n(window).on("load", function () {
-    n(".typed-subtitle").length &&
-      1 < n(".h-subtitle p").length &&
-      n(".typed-subtitle").each(function () {
-        n(this).typed({
-          stringsElement: n(this).prev(".typing-subtitle"),
-          loop: !0,
-        });
-      });
+    $(".h-subtitle.typing-subtitle span").each(function (index) {
+      writeable_text[index] = $(this).text();
+    });
+
+    setTimeout(function () {
+      startWrite(loop_count);
+    }, 1000);
   });
+
+  function startWrite(index) {
+    txt = writeable_text[index];
+    writer();
+  }
+
+  function writer() {
+    document.getElementById("typeHere").innerHTML += txt.charAt(terator);
+    terator++;
+    if (terator < txt.length) {
+      setTimeout(writer, 50);
+    } else {
+      if (loop_count < writeable_text.length - 1) {
+        loop_count++;
+      } else {
+        loop_count = 0;
+      }
+
+      setTimeout(function () {
+        document.getElementById("typeHere").innerHTML = "";
+        terator = 0;
+
+        startWrite(loop_count);
+      }, 2000);
+    }
+  }
 })(jQuery);
